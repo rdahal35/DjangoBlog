@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block content%}
+	 <h1 class="my-4">Welcome to My Blog
+	            <small>Blog Detail</small>
+	          </h1>
+
+
+	          <!-- Blog Post -->
+	          <div class="card mb-4">
+	            <img class="card-img-top" src="{{ post.image.url }}" alt="Card image cap">
+	            <div class="card-body">
+	              <h2 class="card-title">{{post.title}}</h2>
+	              <p class="card-text">{{post.text}}</p>
+	
+	            </div>
+	            <div class="card-footer text-muted">
+	              {{created_date}} By
+	              {{post.author.username}}
+
+	              {% if user.is_authenticated %}
+	              	<a href="{% url 'edit_post' post.id %}" class="btn btn-primary">Edit Post &rarr;</a>
+	              {% endif %}
+	            </div>
+	          </div>
+{% endblock %}

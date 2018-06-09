@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+
+{% load static%}
+{% block content%}
+        <h1 class="my-4">Welcome to My Blog
+              <small>Latest Blogs</small>
+
+            </h1>
+            {% if latest_post%}
+
+	          {% for post in latest_post%}
+	          <!-- Blog Post -->
+	          <div class="card mb-4">
+	            <img class="card-img-top" src="{{ post.image.url }}" alt="Card image cap">
+
+	            <div class="card-body">
+	              <h2 class="card-title">{{post.title}}</h2>
+	              <p class="card-text hide-text">{{post.text}}</p>
+	              <a href="{% url 'post_detail' post.id %}" class="btn btn-primary">Read More &rarr;</a>
+	            </div>
+	            <div class="card-footer text-muted">
+	              {{created_date}} by
+	              {{post.author.username}}
+	            </div>
+	          </div>
+	          {% endfor %}
+
+	         {% else %}
+	         	<strong style="margin-left: 100px; padding: 50px;">No Post to show</strong>
+	         	<br>
+	         	<br>
+
+	         {% endif %}
+
+	        
+
+
+	<h1>Old Posts</h1>
+
+		<div class="card mb-4">
+
+		{% if posts %}
+		<ul>
+		{% for post in posts %}
+			<li><a href="{% url 'post_detail' post.id %}" >{{post.title}}</a></li> 
+		
+		{% endfor %}
+		</ul>
+		{% else %}
+			<br>
+			<br>
+			<strong style="margin-left: 100px; padding: 50px;">No Post to show</strong>
+		         	<br>
+		         	<br>
+
+		 {% endif %}
+
+
+		</div>
+{% endblock %}
